@@ -4,11 +4,32 @@ import { ImageWithFallback } from "@/components/common/ImageWithFallback";
 
 interface ProductCardProps {
   product: Product;
+  onSelect?: (product: Product) => void;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, onSelect }: ProductCardProps) {
+  const handleClick = () => {
+    if (onSelect) {
+      onSelect(product);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleClick();
+    }
+  };
+
   return (
-    <article className="group bg-stone-900/60 hover:bg-stone-900 border border-stone-800/80 rounded-2xl p-3.5 sm:p-4 transition-all duration-200 shadow-sm flex items-start gap-3.5">
+    <article
+      role="button"
+      tabIndex={0}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      aria-label={`Ver detalhes de ${product.name}`}
+      className="group bg-stone-900/60 hover:bg-stone-900 active:bg-stone-850 border border-stone-800/80 hover:border-amber-500/40 rounded-2xl p-3.5 sm:p-4 transition-all duration-200 shadow-sm flex items-start gap-3.5 cursor-pointer touch-manipulation select-none active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+    >
       {/* Informações de texto */}
       <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch">
         <div>
