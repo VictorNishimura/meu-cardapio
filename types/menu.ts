@@ -8,6 +8,7 @@ export interface Category {
 export interface Product {
   id: string;
   categoryId: string;
+  restaurantId?: string;
   name: string;
   description?: string;
   price: number;
@@ -16,5 +17,11 @@ export interface Product {
 }
 
 export interface CategoryWithProducts extends Category {
+  products: Product[];
+}
+
+export interface RestaurantMenu {
+  restaurantId: string;
+  categories: Category[];
   products: Product[];
 }

@@ -3,6 +3,11 @@ export interface BusinessHours {
   hours: string;
 }
 
+export interface RestaurantTheme {
+  primaryColor?: string; // Cor principal de destaque (ex: 'amber', 'emerald', etc.)
+  accentColor?: string;
+}
+
 export interface Restaurant {
   id: string;
   name: string;
@@ -19,4 +24,5 @@ export interface Restaurant {
     defaultMessage?: string;
   };
   instagram?: string;
+  theme?: RestaurantTheme;
 }
